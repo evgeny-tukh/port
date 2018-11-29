@@ -1,0 +1,2 @@
+var userObj = { types: {}, drawers: {} };
+

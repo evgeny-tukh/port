@@ -1,0 +1,93 @@
+{"name":"Depth areas","objects":[
+{
+	"type":3,
+	"name":"\u041E\u041F-3",
+	"properties":
+		{"color":"black",
+		 "lineStyle":1,
+		 "lineWidth":3,
+		 "fillColor":"blue",
+		 "opacity":0.3},
+	"userProps":
+		{"maxDraught":6.3,
+		 "id":"op3"
+                },
+	"userType":3,
+	"userInfoFile":"gazprom_term.ui",
+	"points":
+		[{"lat":59.88366484394495,"lon":30.224978201179965},
+		 {"lat":59.883623628238524,"lon":30.225486747943705},
+		 {"lat":59.88377974297087,"lon":30.225561849796122},
+		 {"lat":59.88370976059533,"lon":30.22610902043516},
+		 {"lat":59.88355902882442,"lon":30.226227037631816},
+		 {"lat":59.8834998125845,"lon":30.226817123615092},
+		 {"lat":59.88356979540215,"lon":30.22684931012327},
+		 {"lat":59.88351596247857,"lon":30.22735356541807},
+		 {"lat":59.883440596239105,"lon":30.22734283658201},
+		 {"lat":59.883494429284745,"lon":30.228544466220683},
+		 {"lat":59.88377974297087,"lon":30.228211872302836},
+		 {"lat":59.88420501731514,"lon":30.22489666196043},
+		 {"lat":59.88374744343125,"lon":30.22459625455076}]
+},
+{
+	"type":3,
+	"name":"\u041E\u041F-4",
+	"properties":
+		{"color":"black",
+		 "lineStyle":1,
+		 "lineWidth":3,
+		 "fillColor":"blue",
+		 "opacity":0.3},
+	"userProps":
+		{"maxDraught":5.2,
+		 "id":"op4"},
+	"userType":3,
+	"userInfoFile":"gazprom_term.ui",
+	"points":
+		[{"lat":59.88237067006307,"lon":30.224767117277793},
+		 {"lat":59.88245374378645,"lon":30.224943070123686},
+		 {"lat":59.88363270253639,"lon":30.225479511926665},
+		 {"lat":59.88367038545969,"lon":30.224953798959746},
+		 {"lat":59.88375651769533,"lon":30.22458901853372},
+		 {"lat":59.88383726646351,"lon":30.223934559534086},
+		 {"lat":59.88263139778104,"lon":30.223183541009917}]
+},
+{
+	"type":3,
+	"name":"\u041f\u0440\u0438\u0447\u0430\u043b 1",
+	"properties":
+		{"color":"black",
+		"lineStyle":1,
+		"lineWidth":3,
+		"fillColor":"blue",
+		"opacity":0.5},
+	"userProps":
+		{"maxDraught":9.6,
+		"id":"b1"},
+	"userType":3,
+	"points":
+		[{"lat":59.915896995092,"lon":30.260716888267},
+		{"lat":59.915442479551,"lon":30.257725688577},
+		{"lat":59.915878104782,"lon":30.257436010003},
+		{"lat":59.916319102278,"lon":30.260461541772}]
+},
+{
+	"type":3,
+	"name":"\u041f\u0440\u0438\u0447\u0430\u043b 2 - NE",
+	"properties":
+		{"color":"black",
+		"lineStyle":1,
+		"lineWidth":3,
+		"fillColor":"blue",
+		"opacity":0.5},
+	"userProps":
+		{"maxDraught":9.5,
+		"id":"b2-ne"},
+	"userType":3,
+	"points":
+		[{"lat":59.915439857616,"lon":30.257723543006},
+		{"lat":59.915106345063,"lon":30.255585285783},
+		{"lat":59.91554466376,"lon":30.255306336046},
+		{"lat":59.915878104782,"lon":30.257436010003}]
+},
+	{"type":3,"name":"\u041f\u0440\u0438\u0447\u0430\u043b 2 - SW","properties":{"color":"black","lineStyle":1,"lineWidth":3,"fillColor":"blue","opacity":0.5},"userProps":{"maxDraught":9.4,"id":"b2-sw"},"userType":3,"points":[{"lat":59.915109101282,"lon":30.25558850463},{"lat":59.914971890315,"lon":30.254716250062},{"lat":59.915407521723,"lon":30.254448029161},{"lat":59.915536596597,"lon":30.255306336046}]},{"type":3,"name":"\u041f\u0440\u0438\u0447\u0430\u043b 3 - NE","properties":{"color":"black","lineStyle":1,"lineWidth":3,"fillColor":"blue","opacity":0.5},"userProps":{"maxDraught":9.5,"id":"b3-ne"},"userType":3,"points":[{"lat":59.914974266227,"lon":30.254720966217},{"lat":59.91496213171,"lon":30.254641572732},{"lat":59.915397763245,"lon":30.254367987412},{"lat":59.915411208572,"lon":30.254448453683}]},{"type":3,"name":"\u041f\u0440\u0438\u0447\u0430\u043b 3 - SW","properties":{"color":"black","lineStyle":1,"lineWidth":3,"fillColor":"blue","opacity":0.5},"userProps":{"maxDraught":9.6,"id":"b3-sw"},"userType":3,"points":[{"lat":59.914963509825,"lon":30.254640499946},{"lat":59.914534561866,"lon":30.251873533028},{"lat":59.915010535496,"lon":30.251803795594},{"lat":59.915397763245,"lon":30.254367987412}]},{"type":3,"name":"\u041f\u0440\u0438\u0447\u0430\u043b 4","properties":{"color":"black","lineStyle":1,"lineWidth":3,"fillColor":"blue","opacity":0.5},"userProps":{"maxDraught":9.6,"id":"b4"},"userType":3,"points":[{"lat":59.914526433974,"lon":30.2518810721},{"lat":59.914395977033,"lon":30.249221393543},{"lat":59.914890776404,"lon":30.249124834019},{"lat":59.915014475095,"lon":30.251812407451}]},{"type":3,"name":"\u041f\u0440\u0438\u0447\u0430\u043b 5","properties":{"color":"black","lineStyle":1,"lineWidth":3,"fillColor":"blue","opacity":0.5},"userProps":{"maxDraught":9.8,"id":"b5"},"userType":3,"points":[{"lat":59.914391976877,"lon":30.249225685176},{"lat":59.914299167597,"lon":30.246539184528},{"lat":59.914783211951,"lon":30.246464082676},{"lat":59.914893465511,"lon":30.249130198437}]},{"type":3,"name":"\u041f\u0440\u0438\u0447\u0430\u043b 6","properties":{"color":"black","lineStyle":1,"lineWidth":3,"fillColor":"blue","opacity":0.5},"userProps":{"maxDraught":9.6,"id":"b6"},"userType":3,"points":[{"lat":59.914348950491,"lon":30.246532747325},{"lat":59.914258830249,"lon":30.243862339931},{"lat":59.914707916626,"lon":30.243808695751},{"lat":59.914788590182,"lon":30.246474811512}]},{"type":3,"name":"\u041f\u0440\u0438\u0447\u0430\u043b 7","properties":{"color":"black","lineStyle":1,"lineWidth":3,"fillColor":"blue","opacity":0.5},"userProps":{"maxDraught":9.8,"id":"b7"},"userType":3,"points":[{"lat":59.914265586709,"lon":30.243871995982},{"lat":59.914137817911,"lon":30.240804621654},{"lat":59.91459766245,"lon":30.24073488422},{"lat":59.914705227504,"lon":30.243819424587}]}],"id":1526314863}

@@ -1,0 +1,6 @@
+{
+    "require": {
+        "swiftmailer/swiftmailer": "^5.4",
+        "pgsq/php5-pgsql" : ""
+    }
+}

@@ -1,0 +1,158 @@
+html
+{
+    overflow: hidden;
+}
+
+body
+{
+    width: 100%;
+    height: fit-content;
+    padding: 0px;
+}
+
+.panel, .infoPanel
+{
+    border-color: black;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 2px;
+    position: absolute;
+    background-color: lightskyblue;
+    top: 0px;
+    height: 98%;
+    margin: 3px;
+    padding: 2px;
+    text-align: center;
+}
+
+.infoPanel
+{
+    width: 300px;
+}
+
+.leftOriented
+{
+    left: 0px;
+}
+
+.rightOriented
+{
+    right: 0px;
+}
+
+.map, .mapNoLeftPanel
+{
+    right: 310px;
+}
+
+.map
+{
+    left: 310px;
+}
+
+.mapNoLeftPanel
+{
+    left: 0px;
+}
+
+.labeledData
+{
+    width: 96%;
+    padding: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 0px;
+    background-color: yellow;
+    text-align: left;
+}
+
+.value
+{
+    float: right;
+    width: fit-content;
+    padding-right: 0px;
+    height: 100%;
+}
+
+.combo
+{
+    float: right;
+    margin-right: 0px;
+    width: 120px;
+}
+
+.switch
+{
+    float: right;
+    margin-right: 10px;
+}
+
+.imgPreviewContainer
+{
+    width:		120px;
+    height:		120px;
+/*    margin-left:	5px;
+    margin-right:	20px;
+    margin-top:		0px;
+    float:		left;*/
+    overflow-x:		auto;
+    overflow-y:		auto;
+    z-order:		700;
+}
+
+.imgPreview, .imgPreviewActualSize
+{
+    /*border-style:	none;
+    border-width:	0px;
+    border-color:	transparent;
+    display:		flex;*/
+}
+
+.imgPreview
+{
+    width:		90%;
+    height:		90%;
+}
+
+.imgPreviewActualSize
+{
+    /*width:		180px;
+    height:		180px;
+    overflow-x:		scroll;
+    overflow-y:		scroll;*/
+    display:		inline;
+}
+
+.paneSettingsButton
+{
+    width:		18px;
+    height:		18px;
+    float:		left;
+    padding:		0px;
+    margin:		0px;
+    margin-right:	1px;
+
+    border-color:	transparent;
+    border-style:	solid;
+    border-width:	1px;
+    border-radius:	3px;
+
+    hint:		Press to set the panel up;
+}
+
+.paneSettingsButton:hover
+{
+    background-color:	gray;
+}
+
+.clip
+{
+    padding: 0px;
+}
+
+canvas
+{
+    -moz-user-select:    none;
+    -webkit-user-select: none;
+    -ms-user-select:     none;
+}
