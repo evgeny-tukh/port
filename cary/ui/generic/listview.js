@@ -341,7 +341,7 @@ Cary.ui.ListView.prototype.setItemData = function (itemIndex, data)
 
 Cary.ui.ListView.prototype.enumItems = function (callback)
 {
-    this.items.forEach (callback);
+    this.items.forEach (function (item) { callback (item); });
 };
 
 Cary.ui.ListView.prototype.getSelectedItem = function ()
