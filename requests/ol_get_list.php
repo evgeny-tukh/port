@@ -17,7 +17,6 @@
                 $objects = $data ['objects'];
                 $objArr  = array ();
 
-var_dump($objects);echo "<br/>***</br>";
                 foreach ((array) $objects as $key => $obj)
                 {
                     if (array_key_exists ('userInfoFile', $obj))

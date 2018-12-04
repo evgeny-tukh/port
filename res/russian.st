@@ -13,7 +13,6 @@ moreInfo,Уточняющая информация
 otherInfo,Прочая информация
 userIcnLib,Библиотека значков пользователя
 layerEditor,Редактор слоя
-userLayers,Слои пользователя
 areaName,Название района
 maxDrg,Мкс.осдк
 category,Категория
@@ -128,6 +127,7 @@ navStatus,Нав.статус
 aisTargets,Цели AIS
 aisTargetsMT,Цели AIS (MarineTraffic)
 properties,Свойства
+property,Свойство
 shape,Форма
 waterLevels,Уровень воды
 time,Время
@@ -203,3 +203,9 @@ moored,Стоянка
 paused,Приостановлен
 groundingAlert,Угр.посадки на мель
 depthMeters2,Глуб
+propChange,ИзмСвОб
+propChangeTitle,Изменение значения свойства объектов слоя
+sort,Сортировка
+byID,По идентификатору
+byName,По имени
+propsChanged,свойств было изменено

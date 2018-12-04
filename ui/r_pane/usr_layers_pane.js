@@ -16,10 +16,11 @@ UserLayersPane.prototype.onInitialize = function ()
     var layers     = new Cary.ui.ListView ({ parent: this.wnd, columns: columns,  visible: true },
                                            { position: 'absolute', right: 2, top: 25, left: 0, height: parseInt (this.wnd.style.height) - 50 });
     var butBlock   = new Cary.ui.ControlBlock ({ parent: this.wnd, visible: true, anchor: Cary.ui.anchor.BOTTOM });
-    var butStyle   = { width: 70, height: 30, float: 'right' };
+    var butStyle   = { width: 'fit-content', height: 30, float: 'right', 'padding-left': 10, 'padding-right': 10 };
     var rgtPane    = document.getElementById ('rightPane');
     var savedLayer = null;
     
+    new Cary.ui.Button ({ text: stringTable.propChange, parent: butBlock.htmlObject, visible: true, onClick: onChangeProperties }, butStyle);
     new Cary.ui.Button ({ text: stringTable.new, parent: butBlock.htmlObject, visible: true, onClick: onAddLayer }, butStyle);
     new Cary.ui.Button ({ text: stringTable.delete, parent: butBlock.htmlObject, visible: true, onClick: onDeleteLayer }, butStyle);
     new Cary.ui.Button ({ text: stringTable.edit, parent: butBlock.htmlObject, visible: true, onClick: onEditLayer }, butStyle);
@@ -146,6 +147,11 @@ UserLayersPane.prototype.onInitialize = function ()
                 }
             }
         }
+    }
+    
+    function onChangeProperties ()
+    {
+        new userObj.PropertyChangeWnd ();
     }
     
     function onEditLayer ()

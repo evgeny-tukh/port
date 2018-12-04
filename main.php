@@ -127,6 +127,7 @@
                     <script src="ui/icn_imp_wnd.js"></script>
                     <script src="ui/ui_list_wnd.js"></script>
                     <script src="ui/obj_att_wnd.js"></script>
+                    <script src="ui/obj_prop_change_wnd.js"></script>
                     <script src="ui/upd_hist_wnd.js"></script>
                     <script src="ui/graph_wnd.js"></script>
                     <script src="ui/usr_icons_wnd.js"></script>
