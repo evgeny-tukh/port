@@ -108,7 +108,7 @@ RoutePane.prototype.onInitialize = function ()
                                                                         var offset = meter.baseLevel + meter.baseValue - level;
                                                                         var i;
 
-                                                                        object.offset = offset;
+                                                                        object.offset = offset * 0.01;
 
                                                                         object.vesselDraught = simulation.draft;
 
@@ -126,7 +126,7 @@ RoutePane.prototype.onInitialize = function ()
                                                {
                                                    var object   = objectList.getItemData (i);
                                                    var affected = affectedObjects.indexOf (object) >= 0;
-                                                   var curDepth = object.getCurrentDepth ();
+                                                   var curDepth = parseInt (object.userProps.limitationType) === userObj.NavContour.limitationType.LIMITED_DRAFT ?  object.getCurrentMaxDraft () :  object.getCurrentDepth ();
                                                    
                                                    objectList.setItemText (i, 1, curDepth.toFixed (2));
                                                    
@@ -607,47 +607,22 @@ RoutePane.prototype.onInitialize = function ()
                                  
                 simulator.enumIntersects (checkIntersection);
 
-                alerts.forEach (function (alert)
-                                {
-                                    objectListAnal.addItem ([alert.object.name, Cary.tools.formatDateTime (alert.time), alert.depth.toFixed (2)], alert.object);
-                                });
-                                
-                /*for (var i = 0; i < alerts.length; ++ i)
-                {
-                    if (alerts [i].object === object)
-                    {
-                        objectListAnal.setItemText (i, 1, Cary.tools.formatDateTime (alerts [j].time));
-                        objectListAnal.setItemText (i, 2, alerts [j].depth.toFixed (2));
+                objectListAnal.removeAllItems ();
 
-                        break;
-                    }
+                if (alerts.length > 0)
+                {
+                    alerts.forEach (function (alert)
+                                    {
+                                        objectListAnal.addItem ([alert.object.name, Cary.tools.formatDateTime (alert.time), alert.depth.toFixed (2)], alert.object);
+                                    });
+                }
+                else
+                {
+                    objectListAnal.addItem ([stringTable.noDanger, '', ''], null);
                 }
                 
-                
-                
-                
-                
-                
-                
-                
-                for (var i = 0; i < objectListAnal.getItemCount (); ++ i)
-                {
-                    var object = objectListAnal.getItemData (i);
-                    
-                    for (var j = 0; j < alerts.length; ++ j)
-                    {
-                        if (alerts [j].object === object)
-                        {
-                            objectListAnal.setItemText (i, 1, Cary.tools.formatDateTime (alerts [j].time));
-                            objectListAnal.setItemText (i, 2, alerts [j].depth.toFixed (2));
-                            
-                            break;
-                        }
-                    }
-                }*/
-                
                 if (alerts.length > 0)
-                    indicateAlert ()
+                    indicateAlert ();
             }
             
             function checkIntersection (intersection)
@@ -661,6 +636,7 @@ RoutePane.prototype.onInitialize = function ()
                 var criticalDepth;
                 var alert;
                 var curTime;
+                var draftMode = parseInt (object.userProps.limitationType) === userObj.NavContour.limitationType.LIMITED_DRAFT;
 
                 object.vesselDraught = draft;
                 
@@ -668,17 +644,17 @@ RoutePane.prototype.onInitialize = function ()
                 {
                     var level  = getObjectDepthAt (object, curTime);
                     var offset = meter.baseLevel + meter.baseValue - level;
-                    var depth;
+                    var curValue;
 
-                    object.offset = offset;
+                    object.offset = offset * 0.01;
                     
-                    depth = object.getCurrentDepth ();
+                    curValue = draftMode ? object.getCurrentMaxDraft () : object.getCurrentDepth ();
                     
-                    if (depth <= draft)
+                    if (curValue <= draft)
                     {
                         alert         = true;
                         criticalTime  = curTime;
-                        criticalDepth = depth;
+                        criticalDepth = curValue;
                     }
                 }
                 

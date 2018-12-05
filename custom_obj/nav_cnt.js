@@ -9,11 +9,12 @@ userObj.NavContour = function (name, points, properties)
     this.tagFlasher     = null;
     
     Cary.userObjects.MultiPointUserObject.prototype.checkProperty.apply (this, ['areaDepth', 0.0]);
+    Cary.userObjects.MultiPointUserObject.prototype.checkProperty.apply (this, ['maxDraft', 0.0]);
     Cary.userObjects.MultiPointUserObject.prototype.checkProperty.apply (this, ['opacity', Cary.userObjects.UserPolygon.DEFAULT_OPACITY]);
     Cary.userObjects.MultiPointUserObject.prototype.checkProperty.apply (this, ['limitationType', userObj.NavContour.limitationType.LIMITED_BELOW]);
 };
 
-userObj.NavContour.limitationType = { LIMITED_BELOW: 1, LIMITED_ABOVE: 2 };
+userObj.NavContour.limitationType = { LIMITED_BELOW: 1, LIMITED_ABOVE: 2, LIMITED_DRAFT: 3 };
 userObj.NavContour.hintModes      = { OFF: 0, FLASH: 1, ON_CLICK: 2 };
 userObj.NavContour.hintMode       = userObj.NavContour.hintModes.OFF;
 
@@ -64,13 +65,36 @@ userObj.NavContour.prototype.getCurrentDepth = function ()
     return depth;
 };
 
+userObj.NavContour.prototype.getCurrentMaxDraft = function ()
+{
+    var draft = 'maxDraft' in this.userProps ? parseFloat (this.userProps.maxDraft) : null;
+    
+    if (this.offset && draft && draft > 1.0)
+        draft -= this.offset;
+    
+    return draft;
+};
+
 userObj.NavContour.prototype.getHintText = function ()
 {
-    var result = this.name + '\n' + stringTable.areaDepthDoc + ': ' + this.userProps.areaDepth + stringTable.m;
-    
-    if (this.offset)
-        result += '\n' + stringTable.areaDepthAct + ': ' + (parseFloat (this.userProps.areaDepth) - this.offset).toFixed (2) + stringTable.m + '\n' + stringTable.relChange + ': ' +
-                  (- this.offset).toFixed (2) + stringTable.m;
+    var result;
+
+    if (this.userProps.limitationType === userObj.NavContour.limitationType.LIMITED_DRAFT)
+    {
+        result = this.name + '\n' + stringTable.areaDraftDoc + ': ' + this.userProps.maxDraft + stringTable.m;
+        
+        if (this.offset)
+            result += '\n' + stringTable.maxDraftAct + ': ' + (parseFloat (this.userProps.maxDraft) - this.offset).toFixed (2) + stringTable.m + '\n' + stringTable.relChange + ': ' +
+                      (- this.offset).toFixed (2) + stringTable.m;
+    }
+    else
+    {
+        result = this.name + '\n' + stringTable.areaDepthDoc + ': ' + this.userProps.areaDepth + stringTable.m;
+        
+        if (this.offset)
+            result += '\n' + stringTable.areaDepthAct + ': ' + (parseFloat (this.userProps.areaDepth) - this.offset).toFixed (2) + stringTable.m + '\n' + stringTable.relChange + ': ' +
+                      (- this.offset).toFixed (2) + stringTable.m;
+    }
 
     return result;
 };
@@ -100,7 +124,8 @@ userObj.NavContour.prototype.getFillColor = function ()
     
     if (this.vesselDraught && this.offset)
     {
-        var actualDepth = parseFloat (this.userProps.areaDepth) - this.offset;
+        var actualDepth    = this.userProps.areaDepth ? parseFloat (this.userProps.areaDepth) - this.offset : 0;
+        var actualMaxDraft = this.userProps.maxDraft? parseFloat (this.userProps.maxDraft) - this.offset : 0;
         
         switch (parseInt (this.userProps.limitationType))
         {
@@ -110,6 +135,9 @@ userObj.NavContour.prototype.getFillColor = function ()
             case userObj.NavContour.limitationType.LIMITED_ABOVE:
                 result = actualDepth <= this.vesselDraught ? userObj.NavContour.ALLOWED_COLOR : userObj.NavContour.FORBIDDEN_COLOR; break;
 
+            case userObj.NavContour.limitationType.LIMITED_DRAFT:
+                result = actualMaxDraft >= this.vesselDraught ? userObj.NavContour.ALLOWED_COLOR : userObj.NavContour.FORBIDDEN_COLOR; break;
+
             default:
                 result = userObj.NavContour.NEUTRAL_COLOR;
         }
@@ -118,7 +146,11 @@ userObj.NavContour.prototype.getFillColor = function ()
     {
         result = userObj.NavContour.NEUTRAL_COLOR;
     }
-    
+if (result===userObj.NavContour.FORBIDDEN_COLOR)    
+{
+    var iii=0;
+    ++iii;
+}
     return result;
 };
 

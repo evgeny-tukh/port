@@ -164,6 +164,8 @@ notLinked,Не привязан
 areaDepth,Глубина контура
 areaDepthDoc,Глуб.(док)
 areaDepthAct,Глуб.(изм)
+maxDraftDoc,МксОсдк(док)
+maxDraftAct,МксОсдк(изм)
 limitationType,Тип ограничения
 limitedBelow,Не меньше
 limitedAbove,Не больше
@@ -209,3 +211,4 @@ sort,Сортировка
 byID,По идентификатору
 byName,По имени
 propsChanged,свойств было изменено
+noDanger,Нет опасностей

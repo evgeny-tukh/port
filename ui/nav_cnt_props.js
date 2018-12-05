@@ -34,6 +34,7 @@ userObj.NavContourPropsWnd.prototype.onInitialize = function ()
     
     limitationCtl.addItem (stringTable.limitedBelow, userObj.NavContour.limitationType.LIMITED_BELOW, limitationType === userObj.NavContour.limitationType.LIMITED_BELOW);
     limitationCtl.addItem (stringTable.limitedAbove, userObj.NavContour.limitationType.LIMITED_ABOVE, limitationType === userObj.NavContour.limitationType.LIMITED_ABOVE);
+    limitationCtl.addItem (stringTable.limitedAbove, userObj.NavContour.limitationType.LIMITED_DRAFT, limitationType === userObj.NavContour.limitationType.LIMITED_DRAFT);
     
     this.okButton.htmlObject.onclick = onOk;
     

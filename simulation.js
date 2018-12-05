@@ -170,22 +170,26 @@ function PassageSimulator ()
         
         function findContourIntersections (contour)
         {
-            var intersected = false;
-            
-            for (var i = 0; i < routeLegs.length; ++ i)
+            // Only contours with present max acceptable draft coould be used; skip other!
+            if (contour.userProps.maxDraft && parseFloat (contour.userProps.maxDraft) > 1)
             {
-                var parts = Cary.geo.intersectContourByLeg (contour.points, routeLegs [i]);
+                var intersected = false;
 
-                parts.forEach (function (part)
-                               {
-                                   intersected = true;
-                                   
-                                   contourIntersections.push ({ leg: i, begin: part.begin, end: part.end, object: contour });
-                               });
+                for (var i = 0; i < routeLegs.length; ++ i)
+                {
+                    var parts = Cary.geo.intersectContourByLeg (contour.points, routeLegs [i]);
+
+                    parts.forEach (function (part)
+                                   {
+                                       intersected = true;
+
+                                       contourIntersections.push ({ leg: i, begin: part.begin, end: part.end, object: contour });
+                                   });
+                }
+
+                if (intersected)
+                    crossedObjects.push (contour);
             }
-            
-            if (intersected)
-                crossedObjects.push (contour);
         }
     }
 
@@ -223,7 +227,7 @@ function PassageSimulator ()
                 var i, found;
 
                 if (intersection.object.offset === null || offset > intersection.object.offset)
-                    intersection.object.offset = offset;
+                    intersection.object.offset = offset * 0.01;
 
                 intersection.object.vesselDraught = draft;
 
@@ -235,6 +239,7 @@ function PassageSimulator ()
     
     function start ()
     {
+        paused     = false;
         timer      = setInterval (proc, 200/*simulation.timeQnt*/);
         simStartAt = Cary.tools.getTimestamp ();
         position   = { lat: route.points [0].lat, lon: route.points [0].lon };

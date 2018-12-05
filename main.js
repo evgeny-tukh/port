@@ -932,6 +932,8 @@ function init ()
             
             if (simulation.run)
             {
+                paused = false;
+                
                 simulation.simulator.setAccel (parseInt (accelCtl.getValue ()));
                 simulation.simulator.start ();
             }
