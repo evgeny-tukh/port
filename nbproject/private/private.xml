@@ -11,6 +11,13 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/port/ui/obj_prop_change_wnd.js</file>
+            <file>file:/C:/xampp/htdocs/port/simulation.js</file>
+            <file>file:/C:/xampp/htdocs/port/ui/r_pane/rte_pane.js</file>
+            <file>file:/C:/xampp/htdocs/port/main.js</file>
+            <file>file:/C:/xampp/htdocs/port/cary/gm/drawers/polygon_drawer.js</file>
+            <file>file:/C:/xampp/htdocs/port/custom_obj/nav_cnt.js</file>
+        </group>
     </open-files>
 </project-private>

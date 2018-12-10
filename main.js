@@ -657,6 +657,17 @@ function init ()
         
         passageButton.setImage (passageMode.active ? 'res/tug26g.png' : 'res/tug26.png');
         
+        if (passageMode.active)
+        {
+            if (routePane)
+                routePane.close ();
+            
+            routePane = null;
+            
+            if (simulation.pane)
+                simulation.pane.show (false);
+        }
+        
         passagePane.show (passageMode.active);
         
         if (!passageMode.active)
@@ -665,6 +676,9 @@ function init ()
     
     function showRoutePane ()
     {
+        if (passageMode.active)
+            switchPassageMode ();
+        
         if (routePane === null)
             routePane = new RoutePane (document.getElementById ('rightPane'), { onClose: function () { routePane = null; } });
     }
@@ -890,6 +904,9 @@ function init ()
 
                 simulation.marker = new google.maps.Marker ({ position: latLngPos, map: map.map, icon: vesselIcon });
             }
+            
+            map.map.setZoom (13);
+            map.map.setCenter (latLngPos);
         }
         
         function onChangeVesselPos ()

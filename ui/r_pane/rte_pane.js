@@ -26,8 +26,9 @@ RoutePane.prototype.onInitialize = function ()
     var buttonBlock      = new Cary.ui.ControlBlock ({ parent: this.client, visible: true }, { padding: 10 });
     var routeList        = new Cary.ui.ListBox ({ parent: this.client, comboBox: false, visible: true, onItemClick: onSelectRoute },
                                                 { position: 'absolute', top: 140, left: 5, width: 290, height: (this.parent.clientHeight - 185) });
-    var simulColumns     = [{ title: stringTable.name, width: 200 }, { title: stringTable.depthMeters, width: 60 }];
-    var analyzeColumns   = [{ title: stringTable.name, width: 120 }, { title: stringTable.dateTime, width: 90 }, { title: stringTable.depthMeters2, width: 45 }];
+    var simulColumns     = [{ title: stringTable.name, width: 200 }, { title: stringTable.maxAcceptableDraft, width: 60 }];
+    var analyzeColumns   = [{ title: stringTable.name, width: 120, onItemClick: showGroundingAlert }, { title: stringTable.dateTime, width: 90, onItemClick: showGroundingAlert },
+                            { title: stringTable.maxAcceptableDraft, width: 45, onItemClick: showGroundingAlert }];
     var objectList       = new Cary.ui.ListView ({ parent: this.client, comboBox: false, columns: simulColumns, visible: false },
                                                  { position: 'absolute', top: 140, left: 5, width: 290, height: (this.parent.clientHeight - 185) });
     var objectListAnal   = new Cary.ui.ListView ({ parent: this.client, comboBox: false, columns: analyzeColumns, visible: false },
@@ -60,6 +61,7 @@ RoutePane.prototype.onInitialize = function ()
     var affectedObjects   = [];
     var allObjects        = [];
     var flashState        = true;
+    var flashingAlert     = null;
     var routeLegs;
     var waterLevelData;
     var sog;
@@ -132,16 +134,17 @@ RoutePane.prototype.onInitialize = function ()
                                                    
                                                    if (affected)
                                                    {
+                                                       objectList.selectItem (i);
+                                                       
                                                        if (curDepth < simulation.simulator.getDraft ())
                                                        {
                                                            globalInterface.pauseResumeSimulation ();
                                                            globalInterface.setStateText (stringTable.groundingAlert);
 
                                                            indicateAlert ();
+                                                           
+                                                           showGrounding (object);
                                                        }
-
-                                                       if (affected)
-                                                           objectList.selectItem (i);
                                                    }
                                                }
                                            });
@@ -154,6 +157,32 @@ RoutePane.prototype.onInitialize = function ()
     Cary.tools.sendRequest ({ url: 'requests/wla_get_list.php', method: 'get', content: Cary.tools.contentTypes.plainText, onLoad: onLoadWaterLevelAreaList, 
                               resType: Cary.tools.resTypes.json });
 
+    function showGrounding (groundingAlert)
+    {
+        var bounds = groundingAlert.getBounds ();
+        
+        map.map.fitBounds ({ east: bounds.maxLon, west: bounds.minLon, north: bounds.maxLat, south: bounds.minLat });
+        
+        if (flashingAlert)
+            flashingAlert.stopFlashing ();
+        
+        flashingAlert = groundingAlert;
+        
+        groundingAlert.startFlashing (500);
+        
+        setTimeout (function ()
+                    {
+                        groundingAlert.stopFlashing ();
+                        
+                        flashingAlert = null;
+                    }, 5000);
+    }
+    
+    function showGroundingAlert (item)
+    {
+        showGrounding (objectListAnal.getItemData (item));
+    }
+    
     function indicateAlert ()
     {
         warningIcon.flash ();
@@ -614,7 +643,12 @@ RoutePane.prototype.onInitialize = function ()
                     alerts.forEach (function (alert)
                                     {
                                         objectListAnal.addItem ([alert.object.name, Cary.tools.formatDateTime (alert.time), alert.depth.toFixed (2)], alert.object);
+                                        
+                                        if (alert.object.createrTag)
+                                            alert.object.createTag ();
                                     });
+                                    
+                    userObj.NavContour.hintMode = userObj.NavContour.hintModes.ON_CLICK;
                 }
                 else
                 {

@@ -101,8 +101,23 @@ Cary.controls.GenericMapControl.prototype.onAdd = function ()
 Cary.controls.GenericMapControl.prototype.draw = function ()
 {
     var projection = this.getProjection ();
+    var bounds     = this.map.getBounds ();
     var basePoint  = projection.fromLatLngToDivPixel (this.position);
+    var northEast  = projection.fromLatLngToDivPixel (bounds.getNorthEast ());
+    var southWest  = projection.fromLatLngToDivPixel (bounds.getSouthWest ());
 
+    if (basePoint.x < southWest.x)
+        basePoint.x = southWest.x;
+    
+    if (basePoint.y < northEast.y)
+        basePoint.y = northEast.y;
+    
+    if ((basePoint.x + this.container.clientWidth) > northEast.x)
+        basePoint.x = northEast.x - this.container.clientWidth;
+    
+    if ((basePoint.y + this.container.clientHeight) > southWest.y)
+        basePoint.y = southWest.y - this.container.clientHeight;
+    
     this.container.style.position = 'absolute';
     this.container.style.left     = Cary.tools.int2pix (basePoint.x);
     this.container.style.top      = Cary.tools.int2pix (basePoint.y);

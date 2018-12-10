@@ -29,7 +29,8 @@ userObj.types.NAV_CONTOUR = 7;
 userObj.NavContour.prototype.createTag = function ()
 {
     var averageLat = null,
-        averageLon = null;
+        averageLon = null,
+        bounds;
 
     if (this.points && this.points.length > 0)
     {
@@ -79,9 +80,9 @@ userObj.NavContour.prototype.getHintText = function ()
 {
     var result;
 
-    if (this.userProps.limitationType === userObj.NavContour.limitationType.LIMITED_DRAFT)
+    if (parseInt (this.userProps.limitationType) === userObj.NavContour.limitationType.LIMITED_DRAFT)
     {
-        result = this.name + '\n' + stringTable.areaDraftDoc + ': ' + this.userProps.maxDraft + stringTable.m;
+        result = this.name + '\n' + stringTable.maxDraftDoc + ': ' + (Cary.tools.isNothing (this.userProps.maxDraft) ? stringTable.unknown : (this.userProps.maxDraft + stringTable.m));
         
         if (this.offset)
             result += '\n' + stringTable.maxDraftAct + ': ' + (parseFloat (this.userProps.maxDraft) - this.offset).toFixed (2) + stringTable.m + '\n' + stringTable.relChange + ': ' +

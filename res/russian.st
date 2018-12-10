@@ -212,3 +212,5 @@ byID,По идентификатору
 byName,По имени
 propsChanged,свойств было изменено
 noDanger,Нет опасностей
+maxAcceptableDraft,МДО
+unknown,Неизвестно

@@ -81,3 +81,33 @@ Cary.userObjects.GenericUserObject.prototype.setGMPath = function (path)
     
     path.forEach (function (vertex) { instance.points.push ({ lat: vertex.lat (), lon: vertex.lng () }); });
 };
+
+Cary.userObjects.GenericUserObject.prototype.getBounds = function ()
+{
+    var minLat    = 90.0,
+        maxLat    = -90.0,
+        minLon    = 180.0,
+        maxLon    = -180.0,
+        centerLat = 0.0,
+        centerLon = 0.0;
+
+    this.points.forEach (function (point)
+                         {
+                             centerLat += point.lat;
+                             centerLon += point.lon;
+                             
+                             if (point.lat < minLat)
+                                 minLat = point.lat;
+                             
+                             if (point.lon < minLon)
+                                 minLon = point.lon;
+                             
+                             if (point.lat > maxLat)
+                                 maxLat = point.lat;
+                             
+                             if (point.lon > maxLon)
+                                 maxLon = point.lon;
+                         });
+                         
+    return { minLat: minLat, maxLat: maxLat, minLon: minLon, maxLon: maxLon, centerLat : centerLat / this.points.length, centerLon: centerLon / this.points.length };
+};
